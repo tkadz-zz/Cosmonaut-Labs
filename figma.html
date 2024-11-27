@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+  <!-- Custom styles for this template-->
+  <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #d5d4d4;
+      padding: 10px 20px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .user {
+      display: flex;
+      align-items: center;
+    }
+    header .user span {
+      margin-right: 10px;
+    }
+    .content {
+      padding: 20px;
+    }
+    .dashboard {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .dashboard div {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .dashboard div h2 {
+      margin: 0;
+      color: #333;
+    }
+    .search {
+      margin-bottom: 20px;
+    }
+    .search input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .table-container {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    table th {
+      background: #f4f4f4;
+    }
+    table td .btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .btn.edit {
+      background: #007bff;
+      color: white;
+    }
+    .btn.view {
+      background: #28a745;
+      color: white;
+    }
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    .pagination button {
+      padding: 5px 10px;
+      margin: 0 2px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+    }
+    .pagination button.active {
+      background: #007bff;
+      color: white;
+    }
+
+
+    .filter-tile {
+      display: inline-block;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #f8f9fa;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .filter-tile:hover {
+      background-color: #e2e6ea;
+    }
+    .filter-tile.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+
+    
+
+    
+
+
+
+  </style>
+</head>
+<body>
+
+  
+<header>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="menulogo.png" style="height: 40px;"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><img src="arrow-down.png" style="height: 15px;" ></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="bell.png" style="height: 20px;">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><span class="dropdown-item" >NOTIFICATIONS</span><hr></li>
+              <li><a class="dropdown-item" href="#">You have 0 notifications at the moment </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#!" style="color: #007bff;">VIEW ALL NOTIFICATIONS</a></li>
+            </ul>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <img src="message.png" style="height: 20px;"> </a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="user.png" style="height: 20px;"> John Doe
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="content">
+  
+
+
+
+  <div class="row">
+    
+    <div class="col-md-6">
+      <div class="card shadow-md">
+        <div class="card-body">
+          <img src="userdom.png" style="height: 50px;">
+          <h1 style="text-align: right;">12</h1>
+        </div>
+        <div class="card-footer bg-success text-white">
+          ACTIVE USERS
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-md">
+          <div class="card-body">
+            <img src="cards.png" style="height: 50px;">
+            <h1 style="text-align: right;">1</h1>
+          </div>
+          <div class="card-footer bg-primary text-white">
+            Today Appointments
+          </div>
+        </div>
+      </div>
+  </div>
+<hr>
+
+<br>
+
+<div class="row">
+
+  <div class="col-md-6">
+    SEARCH <span class="fa fa-search"></span>
+    <div class="search">
+      <form class="form-group">
+        <input class="form-control" type="text" id="search" placeholder="Search by Name, ID...">
+      </form>
+      
+    </div>
+  </div>
+
+  
+  <div class="col-md-6">
+    FILTER <span class="fa fa-filter"></span>
+    <div>
+      <div class="bg-white shadow-sm">
+        <span class="filter-tile" data-filter="age">Age</span>
+        <span class="filter-tile" data-filter="active-care-status">Active Care Status</span>
+        <span class="filter-tile" data-filter="inactive-care-status">Inactive Care Status</span>
+        <span class="filter-tile" data-filter="on-hold-care-status">On-Hold Care Status</span>
+        <span class="filter-tile" data-filter="upcoming-appointments">Upcoming Appointments</span>
+      </div>
+    </div>
+
+
+    </div>
+
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+  
+<div class="col-md-12 p-3">
+  SERVICE USER LIST <span class="fa fa-users"></span>
+
+  <div class="table-container">
+    <div class="table-responsive">
+    <table class="table scrolldown table-striped table-hover "  id="dataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Care Status</th>
+          <th>Next Appointment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="user-list" class="tbodyLoadedData">
+        <!-- Rows will be inserted dynamically -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  
+</div>
+</div>
+
+
+
+
+<script>
+  // Provided dataset
+  const users = [
+    { id: 1, name: "John Doe", age: 78, careStatus: "Active", nextAppointment: "2024-11-18T10:00:00Z" },
+    { id: 2, name: "Jane Smith", age: 84, careStatus: "Inactive", nextAppointment: "2024-11-20T14:30:00Z" },
+    { id: 3, name: "Mary Johnson", age: 92, careStatus: "Active", nextAppointment: "2024-11-19T09:00:00Z" },
+    { id: 4, name: "Peter Brown", age: 75, careStatus: "On Hold", nextAppointment: "2024-11-22T11:00:00Z" },
+    { id: 5, name: "Susan Davis", age: 88, careStatus: "Active", nextAppointment: "2024-11-23T08:30:00Z" },
+    { id: 6, name: "James Wilson", age: 82, careStatus: "Active", nextAppointment: "2024-11-24T15:00:00Z" },
+    { id: 7, name: "Patricia Taylor", age: 79, careStatus: "Inactive", nextAppointment: "2024-11-21T10:30:00Z" },
+    { id: 8, name: "Michael Thomas", age: 85, careStatus: "Active", nextAppointment: "2024-11-25T09:30:00Z" },
+    { id: 9, name: "Linda White", age: 81, careStatus: "Active", nextAppointment: "2024-11-26T13:00:00Z" },
+    { id: 10, name: "Barbara Harris", age: 90, careStatus: "On Hold", nextAppointment: "2024-11-27T12:00:00Z" },
+    { id: 11, name: "Steven Martin", age: 77, careStatus: "Active", nextAppointment: "2024-11-18T11:30:00Z" },
+    { id: 12, name: "Elizabeth Moore", age: 86, careStatus: "Active", nextAppointment: "2024-11-20T16:00:00Z" },
+    { id: 13, name: "Charles Clark", age: 89, careStatus: "Inactive", nextAppointment: "2024-11-19T14:00:00Z" },
+    { id: 14, name: "Dorothy Lewis", age: 87, careStatus: "Active", nextAppointment: "2024-11-21T15:30:00Z" },
+    { id: 15, name: "Christopher Walker", age: 83, careStatus: "Active", nextAppointment: "2024-11-23T11:15:00Z" },
+    { id: 16, name: "Nancy Hall", age: 91, careStatus: "Inactive", nextAppointment: "2024-11-24T10:45:00Z" },
+    { id: 17, name: "Daniel Young", age: 76, careStatus: "On Hold", nextAppointment: "2024-11-25T12:30:00Z" },
+    { id: 18, name: "Karen King", age: 80, careStatus: "Active", nextAppointment: "2024-11-26T09:15:00Z" },
+    { id: 19, name: "Joseph Wright", age: 84, careStatus: "Active", nextAppointment: "2024-11-27T10:00:00Z" },
+    { id: 20, name: "Betty Lopez", age: 78, careStatus: "Inactive", nextAppointment: "2024-11-28T13:45:00Z" }
+  ];
+
+  const userList = document.getElementById('user-list');
+
+  // Function to format the date into a readable format
+  function formatDate(isoDate) {
+    const date = new Date(isoDate);
+    const options = {
+      weekday: 'long',    // e.g., "Monday"
+      year: 'numeric',    // e.g., "2024"
+      month: 'long',      // e.g., "November"
+      day: 'numeric',     // e.g., "18"
+      hour: 'numeric',    // e.g., "10"
+      minute: 'numeric',  // e.g., "00"
+      second: 'numeric',  // e.g., "00"
+      //timeZoneName: 'short' // e.g., "UTC"
+    };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  }
+
+  // Load users into the table
+  function loadUsers() {
+    userList.innerHTML = ''; // Clear existing table rows
+    users.forEach(user => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.age}</td>
+        <td style="color: ${user.careStatus === 'Active' ? 'green' : user.careStatus === 'Inactive' ? 'red' : 'orange'};">
+          ${user.careStatus}
+        </td>
+        <td>${formatDate(user.nextAppointment)}</td> <!-- Format the nextAppointment -->
+        <td>
+          <button class="btn edit">Edit</button>
+          <button class="btn view">View</button>
+        </td>
+      `;
+      userList.appendChild(row); // Append the row to the table
+    });
+  }
+
+  loadUsers(); // Initialize table with users
+</script>
+
+
+
+<!-- Page level plugins -->
+<script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
+
+<script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="assets/js/demo/datatables-demo.js"></script>
+
+
+
+</body>
+</html>
+
+
